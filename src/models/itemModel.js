@@ -4,6 +4,10 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const ItemSchema = new Schema({
+  itemImage: {
+    type: String,
+    required: [true, "Please upload your product image"],
+  },
   title: {
     type: String,
     required: true,
