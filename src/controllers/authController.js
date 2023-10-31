@@ -28,37 +28,35 @@ const authController = {
       email: email,
       password: hashedPassword,
     });
-    await newUser.save();
-    // .then((user) => {
+    await newUser.save().then((user) => {
+      // const tokenPayload = { email: newUser.email, role: "Buyer" };
+      // const verificationToken = generateToken(tokenPayload);
 
-    // const tokenPayload = { email: newUser.email, role: "Buyer" };
-    // const verificationToken = generateToken(tokenPayload);
+      // // const userVerificationLink = `https://mindafrikserver.onrender.com/user/verify-email?token=${verificationToken}`;
+      // const userVerificationLink = `http://localhost:3000/user/verify-email?token=${verificationToken}`;
+      // sendConfirmationEmail(
+      //   req,
+      //   newUser.email,
+      //   newUser.firstName,
+      //   userVerificationLink
+      // );
 
-    // // const userVerificationLink = `https://mindafrikserver.onrender.com/user/verify-email?token=${verificationToken}`;
-    // const userVerificationLink = `http://localhost:3000/user/verify-email?token=${verificationToken}`;
-    // sendConfirmationEmail(
-    //   req,
-    //   newUser.email,
-    //   newUser.firstName,
-    //   userVerificationLink
-    // );
+      const token = generateJWT(user); // Generate JWT using the helper function
 
-    const token = generateJWT(newUser); // Generate JWT using the helper function
+      // sendConfirmationEmail(req, user.email, user.firstName);
 
-    // sendConfirmationEmail(req, user.email, user.firstName);
-
-    res.json({
-      // token,
-      user: {
-        id: newUser._id,
-        firstname: newUser.firstName,
-        lastname: newUser.lastName,
-        email: newUser.email,
-        token: token,
-      },
+      res.json({
+        // token,
+        user: {
+          id: user._id,
+          firstname: user.firstName,
+          lastname: user.lastName,
+          email: user.email,
+          token: token,
+        },
+      });
+      console.log(user);
     });
-    console.log(user);
-    // });
   },
   verifyEmailController: async (req, res) => {
     const { token } = req.query;
