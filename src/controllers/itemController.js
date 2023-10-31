@@ -22,10 +22,18 @@ const itemController = {
     });
     newItem.save().then((item) => res.json(item));
   },
+  // getItemsController: async (req, res) => {
+  //   Item.find()
+  //     .sort({ date: -1 })
+  //     .then((items) => res.json({ data: { items } }));
+  // },
   getItemsController: async (req, res) => {
     Item.find()
       .sort({ date: -1 })
-      .then((items) => res.json({ data: { items } }));
+      .then((items) => res.json({ data: { items } }))
+      .catch((error) =>
+        res.status(500).json({ error: "Internal Server Error" })
+      );
   },
   updateItemsController: async (req, res) => {
     Item.findByIdAndUpdate({ _id: req.params.id }, req.body).then(function (
