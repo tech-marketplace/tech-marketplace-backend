@@ -24,7 +24,9 @@ const app = express();
 app.use(
   cors({
     // origin: "http://localhost:3000",
-    origin: "https://tech-marketplace-frontend-nu.vercel.app/",
+    // origin: "*",
+    // origin: "https://tech-marketplace-frontend-nu.vercel.app/",
+    origin: "https://tech-marketplace-frontend-nu.vercel.app",
     // origin: "http://localhost:6000",
     // origin: "http://localhost:3001/",
     // credentials: true,
